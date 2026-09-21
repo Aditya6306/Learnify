@@ -71,10 +71,10 @@ export const fetchCourseCategories = async () => {
   try {
     const response = await apiConnector("GET", COURSE_CATEGORIES_API)
     console.log("COURSE_CATEGORIES_API API RESPONSE............", response)
-    if (!response?.data?.success) {
+    if (response?.status !== 200) {
       throw new Error("Could Not Fetch Course Categories")
     }
-    result = response?.data?.data
+    result = response?.data
   } catch (error) {
     console.log("COURSE_CATEGORY_API API ERROR............", error)
     toast.error(error.message)
@@ -92,11 +92,11 @@ export const addCourseDetails = async (data, token) => {
       Authorization: `Bearer ${token}`,
     })
     console.log("CREATE COURSE API RESPONSE............", response)
-    if (!response?.data?.success) {
+    if (response?.status !== 201) {
       throw new Error("Could Not Add Course Details")
     }
     toast.success("Course Details Added Successfully")
-    result = response?.data?.data
+    result = response?.data
   } catch (error) {
     console.log("CREATE COURSE API ERROR............", error)
     toast.error(error.message)
@@ -110,12 +110,12 @@ export const editCourseDetails = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
-    const response = await apiConnector("POST", EDIT_COURSE_API, data, {
-      "Content-Type": "multipart/form-data",
+    const response = await apiConnector("PUT", EDIT_COURSE_API, data, {
+      
       Authorization: `Bearer ${token}`,
     })
     console.log("EDIT COURSE API RESPONSE............", response)
-    if (!response?.data?.success) {
+    if (!response?.status === 200) {
       throw new Error("Could Not Update Course Details")
     }
     toast.success("Course Details Updated Successfully")
@@ -137,7 +137,7 @@ export const createSection = async (data, token) => {
       Authorization: `Bearer ${token}`,
     })
     console.log("CREATE SECTION API RESPONSE............", response)
-    if (!response?.data?.success) {
+    if (!response?.status === 201) {
       throw new Error("Could Not Create Section")
     }
     toast.success("Course Section Created")
@@ -181,7 +181,7 @@ export const updateSection = async (data, token) => {
       Authorization: `Bearer ${token}`,
     })
     console.log("UPDATE SECTION API RESPONSE............", response)
-    if (!response?.data?.success) {
+    if (!response?.status === 200) {
       throw new Error("Could Not Update Section")
     }
     toast.success("Course Section Updated")
@@ -273,10 +273,10 @@ export const fetchInstructorCourses = async (token) => {
       }
     )
     console.log("INSTRUCTOR COURSES API RESPONSE............", response)
-    if (!response?.data?.success) {
+    if (!response?.status === 200) {
       throw new Error("Could Not Fetch Instructor Courses")
     }
-    result = response?.data?.data
+    result = response?.data
   } catch (error) {
     console.log("INSTRUCTOR COURSES API ERROR............", error)
     toast.error(error.message)

@@ -11,17 +11,19 @@ export default function MyCourses() {
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const [courses, setCourses] = useState([])
-
+  console.log("instructor courses", courses);
   useEffect(() => {
     const fetchCourses = async () => {
       const result = await fetchInstructorCourses(token)
+      console.log("instructor courses result", result);
       if (result) {
         setCourses(result)
+        console.log("instructor courses", courses);
       }
     }
     fetchCourses()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  },[])
 
   return (
     <div>

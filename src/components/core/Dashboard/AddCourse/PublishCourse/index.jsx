@@ -21,6 +21,7 @@ export default function PublishCourse() {
     if (course?.status === COURSE_STATUS.PUBLISHED) {
       setValue("public", true)
     }
+    console.log("course", course);
   }, [])
 
   const goBack = () => {
@@ -42,10 +43,11 @@ export default function PublishCourse() {
       // form has not been updated
       // no need to make api call
       goToCourses()
+
       return
     }
     const formData = new FormData()
-    formData.append("courseId", course._id)
+    formData.append("id", course.id)
     const courseStatus = getValues("public")
       ? COURSE_STATUS.PUBLISHED
       : COURSE_STATUS.DRAFT
@@ -53,6 +55,7 @@ export default function PublishCourse() {
     setLoading(true)
     const result = await editCourseDetails(formData, token)
     if (result) {
+      console.log("course published", result)
       goToCourses()
     }
     setLoading(false)

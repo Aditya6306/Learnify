@@ -1,9 +1,9 @@
-const BASE_URL = "https://localhost:4000/api/v1"
+const BASE_URL = "http://localhost:8080/api"
 
 // AUTH ENDPOINTS
 export const endpoints = {
-  SENDOTP_API: BASE_URL + "/auth/sendotp",
-  SIGNUP_API: BASE_URL + "/auth/signup",
+  SENDOTP_API: BASE_URL + "/auth/send-otp",
+  SIGNUP_API: BASE_URL + "/auth/register",
   LOGIN_API: BASE_URL + "/auth/login",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
@@ -30,13 +30,13 @@ export const courseEndpoints = {
   EDIT_COURSE_API: BASE_URL + "/course/editCourse",
   COURSE_CATEGORIES_API: BASE_URL + "/course/showAllCategories",
   CREATE_COURSE_API: BASE_URL + "/course/createCourse",
-  CREATE_SECTION_API: BASE_URL + "/course/addSection",
-  CREATE_SUBSECTION_API: BASE_URL + "/course/addSubSection",
-  UPDATE_SECTION_API: BASE_URL + "/course/updateSection",
-  UPDATE_SUBSECTION_API: BASE_URL + "/course/updateSubSection",
+  CREATE_SECTION_API: BASE_URL + "/course/section/addSection",
+  CREATE_SUBSECTION_API: BASE_URL + "/course/subsection/addSubSection",
+  UPDATE_SECTION_API: BASE_URL + "/course/section/updateSection",
+  UPDATE_SUBSECTION_API: BASE_URL + "/course/subsection/updateSubSection",
   GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/course/getInstructorCourses",
-  DELETE_SECTION_API: BASE_URL + "/course/deleteSection",
-  DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
+  DELETE_SECTION_API: BASE_URL + "/course/section/deleteSection",
+  DELETE_SUBSECTION_API: BASE_URL + "/course/subsection/deleteSubSection",
   DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
   GET_FULL_COURSE_DETAILS_AUTHENTICATED:
     BASE_URL + "/course/getFullCourseDetails",

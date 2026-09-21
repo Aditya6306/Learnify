@@ -27,7 +27,7 @@ export function sendOtp(email, navigate) {
 
       console.log(response.data.success)
 
-      if (!response.data.success) {
+      if (response.status !== 200 ) {
         throw new Error(response.data.message)
       }
 
@@ -43,7 +43,7 @@ export function sendOtp(email, navigate) {
 }
 
 export function signUp(
-  accountType,
+  role,
   firstName,
   lastName,
   email,
@@ -57,7 +57,7 @@ export function signUp(
     dispatch(setLoading(true))
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
-        accountType,
+        role,
         firstName,
         lastName,
         email,
@@ -68,7 +68,7 @@ export function signUp(
 
       console.log("SIGNUP API RESPONSE............", response)
 
-      if (!response.data.success) {
+      if (response.status !== 201) {
         throw new Error(response.data.message)
       }
       toast.success("Signup Successful")
@@ -95,19 +95,19 @@ export function login(email, password, navigate) {
 
       console.log("LOGIN API RESPONSE............", response)
 
-      if (!response.data.success) {
+      if (response.status !== 200) {
         throw new Error(response.data.message)
       }
 
       toast.success("Login Successful")
-      dispatch(setToken(response.data.token))
+      dispatch(setToken(response.data.accessToken))
       // dispatch(setUser(response.data.user))
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
       dispatch(setUser({ ...response.data.user, image: userImage }))
       
-      localStorage.setItem("token", JSON.stringify(response.data.token))
+      localStorage.setItem("token", JSON.stringify(response.data.accessToken))
       localStorage.setItem("user", JSON.stringify(response.data.user))
       navigate("/dashboard/my-profile")
     } catch (error) {

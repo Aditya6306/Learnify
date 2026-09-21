@@ -25,9 +25,9 @@ export const Navbar = () => {
     }
     const [subLinks,setSubLinks] = useState([]);
 
-    console.log("printing from navbar....", user)
-    console.log("printing token from navbar....", localStorage.getItem("token"))
-    console.log("printing user from navbar....", localStorage.getItem("user"))
+    // console.log("printing from navbar....", user)
+    // console.log("printing token from navbar....", localStorage.getItem("token"))
+    // console.log("printing user from navbar....", localStorage.getItem("user"))
 
     const fetchSublinks = async() => {
            console.log("inside fetch sublinks.....................................");
@@ -37,7 +37,7 @@ export const Navbar = () => {
             try{
                 const res = await apiConnector("GET",categories.CATEGORIES_API);
                 console.log("printing SubLinks", res);
-                setSubLinks(res.data.allCategory);
+                setSubLinks(res.data);
             }
             catch(err){
                 console.log("could not fetch Categories.", err)
@@ -75,8 +75,8 @@ export const Navbar = () => {
                                         {
                                             (subLinks && subLinks.length) ? (
                                                 subLinks.map((subLink, index) => (
-                                                    <Link to={`${subLink.link}`} key={index}>
-                                                        <p>{subLink.name}</p>
+                                                    <Link to={`${subLink.categoryId}`} key={index}>
+                                                        <p>{subLink.categoryName}</p>
                                                     </Link>
                                                 ))
                                             ) : (

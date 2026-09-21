@@ -1,20 +1,20 @@
 import "./App.css";
 import {Route, Routes, useNavigate } from "react-router-dom";
-import Home from "./pages/Home"
-import Navbar from "./components/common/Navbar"
+import {Home} from "./pages/Home"
+import {Navbar} from "./components/common/Navbar"
 import OpenRoute from "./components/core/Auth/OpenRoute"
 
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import ForgotPassword from "./pages/ForgotPassword";
+import {Login} from "./pages/Login"
+import {Signup} from "./pages/Signup"
+import {ForgotPassword} from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
-import About from "./pages/About";
+import {About} from "./pages/About";
 import Contact from "./pages/Contact";
 import MyProfile from "./components/core/Dashboard/MyProfile";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
-import Error from "./pages/Error"
+import {Error} from "./pages/Error"
 import Settings from "./components/core/Dashboard/Settings";
 import { useDispatch, useSelector } from "react-redux";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
@@ -112,7 +112,7 @@ function App() {
       
 
       {
-        user?.accountType === ACCOUNT_TYPE.STUDENT && (
+        user?.role === ACCOUNT_TYPE.STUDENT && (
           <>
           <Route path="dashboard/cart" element={<Cart />} />
           <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
@@ -121,7 +121,7 @@ function App() {
       }
 
       {
-        user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+        user?.role === ACCOUNT_TYPE.INSTRUCTOR && (
           <>
           <Route path="dashboard/instructor" element={<Instructor />} />
           <Route path="dashboard/add-course" element={<AddCourse />} />

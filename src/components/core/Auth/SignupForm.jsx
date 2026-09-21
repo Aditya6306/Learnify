@@ -26,7 +26,7 @@ export const SignupForm = () => {
     const [showPassword, setShowPassword] =useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-    const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+    const [role, setRole] = useState(ACCOUNT_TYPE.STUDENT);                                      
 
     const { firstName, lastName, email, password, confirmPassword } = formData
 
@@ -47,7 +47,7 @@ export const SignupForm = () => {
 
         const signupData = {
             ...formData,
-            accountType,
+            role,
         }
 
         dispatch(setSignupData(signupData))
@@ -62,7 +62,7 @@ export const SignupForm = () => {
             confirmPassword: "",
         })
 
-        setAccountType(ACCOUNT_TYPE.STUDENT)
+        setRole(ACCOUNT_TYPE.STUDENT)
     }
 
     const tabData = [
@@ -84,7 +84,7 @@ export const SignupForm = () => {
   return (
 
     <div>
-        <Tab tabData={tabData} field={accountType} setField={setAccountType}></Tab>
+        <Tab tabData={tabData} field={role} setField={setRole}></Tab>
 
         <form onSubmit={handleOnSubmit} className=" flex w-full flex-col gap-y-4">
 
@@ -108,11 +108,11 @@ export const SignupForm = () => {
 
         <label className="relative">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                Lasr Name <sup className="text-pink-200">*</sup>
+                Last Name <sup className="text-pink-200">*</sup>
             </p>
             <input
                 required
-                type={showPassword ? "text" : "password"}
+                type="text"
                 name="lastName"
                 value={lastName}
                 onChange={handleOnChange}
