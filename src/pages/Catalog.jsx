@@ -22,7 +22,7 @@ const Catalog = () => {
         const getCategories = async() => {
             const res = await apiConnector("GET", categories.CATEGORIES_API);
             const category_id = 
-            res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
+            res?.data?.filter((ct) => ct.categoryName.split(" ").join("-").toLowerCase() === catalogName)[0].categoryId;
             setCategoryId(category_id);
         }
         getCategories();
@@ -65,11 +65,11 @@ const Catalog = () => {
               <p className="text-sm text-richblack-300">
                 {`Home / Catalog / `}
                 <span className="text-yellow-25">
-                  {catalogPageData?.data?.selectedCategory?.name}
+                  {catalogPageData?.data?.selectedCategory?.categoryName}
                 </span>
               </p>
               <p className="text-3xl text-richblack-5">
-                {catalogPageData?.data?.selectedCategory?.name}
+                {catalogPageData?.data?.selectedCategory?.categoryName}
               </p>
               <p className="max-w-[870px] text-richblack-200">
                 {catalogPageData?.data?.selectedCategory?.description}
@@ -111,7 +111,7 @@ const Catalog = () => {
           {/* Section 2 */}
           <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
             <div className="section_heading">
-              Top courses in {catalogPageData?.data?.differentCategory?.name}
+              Top courses in {catalogPageData?.data?.differentCategory?.categoryName}
             </div>
             <div className="py-8">
               <CourseSlider

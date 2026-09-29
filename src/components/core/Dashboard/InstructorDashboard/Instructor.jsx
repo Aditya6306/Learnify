@@ -15,10 +15,10 @@ export default function Instructor() {
     useEffect(() => {
       (async () => {
         setLoading(true)
-        // const instructorApiData = await getInstructorData(token)
+        const instructorApiData = await getInstructorData(token)
         const result = await fetchInstructorCourses(token)
-        // console.log(instructorApiData)
-        // if (instructorApiData.length) setInstructorData(instructorApiData)
+        console.log(instructorApiData)
+        if (instructorApiData.length) setInstructorData(instructorApiData)
         if (result) {
           setCourses(result)
         }
@@ -26,15 +26,17 @@ export default function Instructor() {
       })()
     }, [])
   
-    const totalAmount = courses?.reduce(
-      (acc, curr) => acc + curr.totalAmountGenerated,
-      0
-    )
+    // const totalAmount = courses?.reduce(
+    //   (acc, curr) => acc + curr.totalAmountGenerated,
+    //   0
+    // )
   
-    const totalStudents = instructorData?.reduce(
-      (acc, curr) => acc + curr.totalStudentsEnrolled,
-      0
-    )
+    // const totalStudents = instructorData?.reduce(
+    //   (acc, curr) => acc + curr.totalStudentsEnrolled,
+    //   0
+    // )
+    const totalAmount = instructorData?.totalAmount || 0;
+    const totalStudents = instructorData?.totalStudents || 0;
   
     return (
       <div>
@@ -108,9 +110,9 @@ export default function Instructor() {
                         {course.courseName}
                       </p>
                       <div className="mt-1 flex items-center space-x-2">
-                        <p className="text-xs font-medium text-richblack-300">
+                        {/* <p className="text-xs font-medium text-richblack-300">
                           {course.studentsEnroled.length} students
-                        </p>
+                        </p> */}
                         <p className="text-xs font-medium text-richblack-300">
                           |
                         </p>
